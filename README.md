@@ -84,7 +84,7 @@ Deep Q-Network (DQN) is a reinforcement learning algorithm that uses a neural ne
 Q(s, a) = \mathbb{E}[r + \gamma \max_{a'} Q(s', a') | s, a]
 ```
 
-To do this, we use two neural networks: a local network and a target network. The local network is updated during the training process while the target network is used to compute targets during the training process. This approach address the moving target problem, where updates to the network cause targets to shift, potentially leading to oscillations or divergence in the training process.
+To do this, we use two neural networks: a local network and a target network. The local network is updated during the training process while the target network is used to compute targets during the training process. This approach addresses the moving target problem, where updates to the network cause targets to shift, potentially leading to oscillations or divergence in the training process.
 
 To train the local network, we compute $Q_{\theta}(s,a)$ using the local network and we compute a target value $Q_{\text{target}} = r + \gamma \max_{a'} Q_{\theta'}(s',a')$ using the target network. Although these targets may not be very accurate at the beginning of the training process, the reward $r$ in the formula and regular soft updates from the local network to the target network gradually move the learning process in the right direction.
 
@@ -362,10 +362,6 @@ class OUNoise:
 DDPG can suffer from overestimation bias in the critic network (similar to issues seen in DQN). TD3 addresses this issue by using two seperate critic networks and updating the polist using the minimum value between the critics, reducing the risk of overestimation (similar to Double DQN). Furthermore, TD3 introduces policy smoothing where small noise is added to target actions to prevent the critic from becoming overaly optimistic about specific actions. Additionally, TD3 introduces delayed policy updates where the `Actor` is updated less frequently than the `Critic`, allowing the action-value estimates to stabilize before updating the policy.
 
 The full implementation of the algorithm is in `05. DDPG.ipynb`.
-
-**Observed Training Results:**
-
-![DDPG Training History](./training-history/DDPG.PNG)
 
 ### References:
 
