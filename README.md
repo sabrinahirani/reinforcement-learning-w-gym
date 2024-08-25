@@ -317,7 +317,7 @@ The full implementation of the algorithm is in `04. PPO.ipynb`.
 
 ### 05. Deep Deterministic Policy Gradient (DDPG)
 
-Deep Deterministic Policy Gradient (DDPG) is a reinforcement learning algorithm that uses actor-critic methods (as seen in A2C); however, DDPG builds on the actor-critic framework by combining actor-critic methods with strategies from Q-learning (like DQN). Here, the `Critic` models the action-value function $Q_{\theta}(s,a)$ instead of $V(s_t)$ from A2C. The algorithm also incorporates several features from DQN including the use of a `ReplayBuffer` for experience replay and the use of soft updates and target networks for both the `Actor` and the `Critic`.
+Deep Deterministic Policy Gradient (DDPG) is a reinforcement learning algorithm that uses actor-critic methods (as seen in A2C); however, DDPG builds on the actor-critic framework by combining actor-critic methods with strategies from Q-learning (like DQN). Here, the `Critic` models the action-value function $Q_{\theta}(s,a)$ (instead of $V(s_t)$ from A2C). The algorithm also incorporates several features from DQN including the use of a `ReplayBuffer` for experience replay and the use of soft updates and target networks for both the `Actor` and the `Critic`.
 
 In practice, Ornstein-Uhlenbeck noise `OUNoise` is often used to encourage exploration in DDPG. Ornstein-Uhlenbeck noise is a stochastic process that generates noise with specific characteristics: 1) Mean Reversion: The characteristic that the noise reverts to a central value over time (preventing noise from drifting too far) and 2) Temporal Correlation: The characteristic that noise values are correlated over time (encouraging smooth transitions rather than abrupt changes).
 
@@ -357,9 +357,9 @@ class OUNoise:
 
 ```
 
-**Further Enhancements: Twin Deep Deterministic Policy Gradient (TD3)**
+**Further Enhancements To Implementation: Twin Deep Deterministic Policy Gradient (TD3)**
 
-DDPG can suffer from overestimation bias in the critic network (similar to issues seen in DQN). TD3 addresses this issue by using two seperate critic networks and updating the polist using the minimum value between the critics, reducing the risk of overestimation (similar to Double DQN). Furthermore, TD3 introduces policy smoothing where small noise is added to target actions to prevent the critic from becoming overaly optimistic about specific actions. Additionally, TD3 introduces delayed policy updates where the `Actor` is updated less frequently than the `Critic`, allowing the action-value estimates to stabilize before updating the policy.
+DDPG can suffer from overestimation bias in the critic network (similar to issues seen in DQN). TD3 addresses this issue by using two separate critic networks and updating the policy using the minimum value from both critics, reducing the risk of overestimation (similar approach to Double DQN). Furthermore, TD3 introduces policy smoothing where small noise is added to target actions to prevent the critic from becoming overly optimistic about specific actions. Additionally, TD3 introduces delayed policy updates where the `Actor` is updated less frequently than the `Critic`, allowing the action-value estimates to stabilize before updating the policy.
 
 The full implementation of the algorithm is in `05. DDPG.ipynb`.
 
